@@ -1,11 +1,23 @@
-import React from 'react';
-import Signup from '../Modal/Signup';
+import React, { useEffect } from 'react';
+import { auth } from '../../config/firebase';
 import { connect } from 'react-redux';
-import { clearUser } from '../../store/Auth/actions';
+import { clearUser, setUser } from '../../store/Auth/actions';
+
+import Signup from '../Modal/Signup';
 
 import { Button } from '@material-ui/core';
 
-const Header = ({ user, clearUser }) => {
+const Header = ({ user, clearUser, setUser }) => {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) setUser(authUser);
+      else clearUser();
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [user, clearUser, setUser]);
+
   return (
     <div className='app__header'>
       <img
@@ -29,7 +41,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  clearUser
+  clearUser,
+  setUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

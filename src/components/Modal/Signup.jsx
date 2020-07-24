@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { auth } from '../../config/firebase';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setUser, signUp, clearUser } from '../../store/Auth/actions';
+import { signUp } from '../../store/Auth/actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Signup = ({ signUp, setUser, user, clearUser }) => {
+const Signup = ({ signUp }) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -36,16 +35,6 @@ const Signup = ({ signUp, setUser, user, clearUser }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) setUser(authUser);
-      else clearUser();
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, [user, clearUser, setUser]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -98,9 +87,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setUser,
-  signUp,
-  clearUser
+  signUp
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
