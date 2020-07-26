@@ -1,0 +1,32 @@
+.postupload {
+  max-width: 500px;
+  background-color: #fff;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  margin: 15px auto;
+  padding: 10px;
+}
+
+.postupload__header {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.postupload__body {
+  margin: auto;
+}
+
+.postupload__body input {
+  display: none;
+}
+
+.postupload-sorry {
+  font-weight: lighter;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}

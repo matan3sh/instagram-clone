@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { signUp } from '../../store/Auth/actions';
+import { signIn } from '../../store/Auth/actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -27,18 +27,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Signup = ({ signUp }) => {
+const Signin = ({ signIn }) => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
 
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const onSubmit = (event) => {
     event.preventDefault();
-    signUp(username, email, password);
+    signIn(email, password);
   };
 
   return (
@@ -55,13 +54,6 @@ const Signup = ({ signUp }) => {
             </center>
 
             <Input
-              placeholder='Username'
-              type='text'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-
-            <Input
               placeholder='Email'
               type='text'
               value={email}
@@ -73,11 +65,11 @@ const Signup = ({ signUp }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type='submit'>Sign Up</Button>
+            <Button type='submit'>Sign In</Button>
           </form>
         </div>
       </Modal>
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      <Button onClick={() => setOpen(true)}>Sign In</Button>
     </>
   );
 };
@@ -85,7 +77,7 @@ const Signup = ({ signUp }) => {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
-  signUp
+  signIn
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);

@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { clearUser, setUser } from '../../store/Auth/actions';
 
 import Signup from '../Modal/Signup';
+import Signin from '../Modal/Signin';
 
 import { Button } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
 
 const Header = ({ user, clearUser, setUser }) => {
   useEffect(() => {
@@ -26,10 +28,18 @@ const Header = ({ user, clearUser, setUser }) => {
         className='app__headerImage'
       />
       {user ? (
-        <Button onClick={() => clearUser()}>Logout</Button>
+        <div className='app__header-right'>
+          <Button onClick={() => clearUser()}>Logout</Button>
+          <Avatar
+            className='post__avatar'
+            alt={user.displayName}
+            src='/static/images/avatar/1.jpg'
+          />
+        </div>
       ) : (
         <div className='app__loginContainer'>
           <Signup />
+          <Signin />
         </div>
       )}
     </div>

@@ -2,7 +2,10 @@
   max-width: 500px;
   background-color: #fff;
   border: 1px solid lightgray;
-  margin-bottom: 45px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 2rem;
 }
 
 .post__image {
