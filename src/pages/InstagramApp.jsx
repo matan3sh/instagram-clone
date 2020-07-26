@@ -15,9 +15,11 @@ const InstagramApp = ({ posts, loadPosts, user }) => {
       {user?.displayName ? (
         <PostUpload />
       ) : (
-        <h3 className='postupload-sorry'>Sorry you need to login to upload</h3>
+        <h3 className='postupload-sorry'>
+          Sorry you need to login to upload and comment
+        </h3>
       )}
-      <PostList posts={posts} />
+      <PostList posts={posts} loggedInUsername={user?.displayName} />
     </div>
   );
 };
